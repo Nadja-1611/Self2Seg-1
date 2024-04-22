@@ -45,7 +45,7 @@ args.initialization = "boxes"
 args.number_of_denoisers=2
 args.method = "joint"
 args.dataset = "brodi.png"
-args.lam = [0.02, 0.03, 0.04, 0.05, 0.06, 0.07]
+args.lam = [0.01,0.02]
 args.denoised_provided = False
 args.box_fg = torch.zeros((1,256,256))
 args.box_fg[::,10:60,10:70] = 1
@@ -72,7 +72,7 @@ if args.dataset == "brodi.png":
     f[:,:,:140]=f[:,:,:140]+torch.abs(torch.mean(f[:,:,:140])-torch.mean(f[:,:,140:]))
     ## add gaussian noise
     img = f +0.1* torch.randn_like(f)*torch.max(f)
-    seg, den = noise2seg(img, initialization=args.initialization, lam = 0.01, box_foreground = args.box_fg, box_background = args.box_bg, number_of_denoisers=2)
+    seg, den = noise2seg(img, initialization=args.initialization, lam = 0.02, box_foreground = args.box_fg, box_background = args.box_bg, number_of_denoisers=2)
 
 
 for j in range(data.shape[0]):
